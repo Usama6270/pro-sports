@@ -4,6 +4,41 @@ const WA_BASE = "https://wa.me/923041632932";
 
 const products = [
   {
+    id: 29,
+    name: "Custom Polo Shirt",
+    category: "sportswear",
+    emoji: "👕",
+    tags: ["current", "custom", "teamwear"],
+    description:
+      "Elevate your team’s look with the PRO SPORTS Custom Polo Shirt, designed for performance, comfort, and professional style. Crafted from premium breathable fabric, this polo shirt delivers a lightweight feel with moisture-wicking and quick-dry technology to keep you comfortable throughout the day. Featuring a modern athletic fit and durable construction, it provides the perfect combination of style, functionality, and versatility. The customizable design allows you to add team logos, names, and colors for a unique professional appearance. Premium breathable lightweight fabric, soft and durable construction, comfortable athletic fit, moisture-wicking performance, quick-dry technology, and customizable branding options make it ideal for sports teams, corporate wear, events, clubs, and casual uniforms. Create a professional look with a polo shirt tailored to your brand and performance needs. Professional Style. Custom Design. Built for Performance. Available in multiple color combinations and sizes.",
+    images: ["images/polo11.jpeg"],
+  },
+  {
+    id: 28,
+    name: "Custom Sports Bra",
+    category: "sportswear",
+    emoji: "🏋️",
+    tags: ["current", "fitness", "custom"],
+    description:
+      "Train with confidence and style in the PRO SPORTS Custom Sports Bra. Designed with premium stretch fabric and a supportive fit, this sports bra delivers the perfect balance of comfort, flexibility, and performance. Featuring moisture-wicking and quick-dry technology, it keeps you cool and comfortable during intense workouts, training sessions, and everyday activities. The customizable design allows you to add your team logo, colors, and branding for a unique professional look. Premium breathable stretch fabric, medium to high support construction, soft and secure fit, moisture-wicking performance, quick-dry material, and customizable logo, name, and color options make it ideal for gym workouts, running, yoga, fitness training, and team wear. Create your own style and perform at your best with PRO SPORTS Custom Sports Bra. Available in multiple colors.",
+    images: ["images/bra11.jpeg"],
+  },
+  {
+    id: 27,
+    name: "Leggings",
+    category: "sportswear",
+    emoji: "👖",
+    tags: ["current", "fitness", "lifestyle"],
+    description:
+      "Designed for movement and built for comfort, the PRO SPORTS Performance Leggings combine premium stretch fabric with a sleek body-contouring fit. Featuring a high-waist design and advanced moisture-wicking technology, these leggings provide maximum support, flexibility, and comfort for workouts, running, yoga, and everyday wear. The soft breathable fabric ensures unrestricted movement while maintaining a stylish and confident look. High-waisted flattering fit, soft stretchable construction, sweat-wicking and quick-dry technology, squat-proof full-coverage design, comfortable waistband, and versatile performance make them perfect for gym sessions, training, yoga, fitness activities, and casual lifestyle wear. Train harder, move freely, and look confident with PRO SPORTS Performance Leggings. Available in multiple stylish colors.",
+    images: [
+      "images/l11.jpeg",
+      "images/l12.jpeg",
+      "images/l13.jpeg",
+      "images/l14.jpeg",
+    ],
+  },
+  {
     id: 26,
     name: "Swimsuit",
     category: "sportswear",
@@ -649,40 +684,32 @@ function initPageTransitions() {
 const mobileNavigation = {
   main: [
     { label: "HOME", href: "index.html" },
-    { label: "Shop", href: "shop.html" },
+    { label: "SHOP", href: "shop.html" },
     {
       label: "SPORTSWEAR",
       children: [
-        { label: "Soccer Uniform", href: "shop.html?product=22" },
-        { label: "American Football Uniform", href: "shop.html?product=14" },
-        { label: "Baseball Uniform", href: "shop.html?product=21" },
         { label: "Basketball Uniform", href: "shop.html?product=9" },
+        { label: "American Football Uniform", href: "shop.html?product=14" },
+        { label: "Soccer Uniform", href: "shop.html?product=22" },
+        { label: "Baseball Uniform", href: "shop.html?product=21" },
         { label: "T-Shirts", href: "shop.html?product=11" },
-        { label: "Tank Tops", href: "shop.html?product=18" },
-        { label: "MMA Fight Shorts", href: "shop.html?product=24" },
-        { label: "Women’s Flare Pants", href: "shop.html?product=25" },
-        { label: "Performance Swimsuit", href: "shop.html?product=26" },
+        { label: "Polo Shirts", href: "shop.html?product=29" },
+        { label: "Sports Bra", href: "shop.html?product=28" },
+        { label: "Leggings", href: "shop.html?product=27" },
+        { label: "Swimsuit", href: "shop.html?product=26" },
       ],
     },
     {
       label: "FASHION WEAR",
       children: [
-        { label: "Jackets", href: "shop.html?category=jacket" },
-        { label: "Hoodies & Outerwear", href: "shop.html?category=outerwear" },
-        { label: "Tracksuits", href: "shop.html?category=tracksuit" },
-        { label: "Accessories", href: "shop.html?category=accessories" },
-        { label: "Socks", href: "shop.html?category=socks" },
-        { label: "Footwear", href: "shop.html?category=footwear" },
-      ],
-    },
-    {
-      label: "STREETWEAR",
-      children: [
-        { label: "Boxy Crop Tee", href: "shop.html?product=23" },
-        { label: "Casual T-Shirts", href: "shop.html?product=11" },
-        { label: "Custom Caps", href: "shop.html?product=17" },
-        { label: "Lifestyle Apparel", href: "shop.html?category=sportswear" },
-        { label: "Custom Slides", href: "shop.html?product=27" },
+        { label: "Women's Flare Pants", href: "shop.html?product=25" },
+        { label: "Boxy Crop Tees", href: "shop.html?product=23" },
+        { label: "Tracksuits", href: "shop.html?product=12" },
+        { label: "Hoodies", href: "shop.html?product=16" },
+        { label: "Jackets", href: "shop.html?product=20" },
+        { label: "Windbreaker", href: "shop.html?product=19" },
+        { label: "MMA Shorts", href: "shop.html?product=24" },
+        { label: "Tank Tops", href: "shop.html?product=18" },
       ],
     },
     { label: "FAQ", href: "faq.html" },
