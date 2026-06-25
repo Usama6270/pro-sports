@@ -167,7 +167,7 @@ const products = [
     images: ['images/Basketball Uniform11.jpeg', 'images/Basketball Uniform12.jpeg', 'images/Basketball Uniform13.jpeg', 'images/Basketball Uniform14.jpeg']
   },
   {
-    id: 12,
+    id: 27,
     name: 'Custom Slides',
     category: 'footwear',
     emoji: '👟',
@@ -257,6 +257,27 @@ function initCategoryCarousel() {
 
     let currentIndex = 0;
     let carouselInterval;
+    let touchStartX = 0;
+    let touchDeltaX = 0;
+    let isSwiping = false;
+
+    function getContainerWidth() {
+      return track.parentElement ? track.parentElement.offsetWidth : 0;
+    }
+
+    function syncSlideWidths() {
+      const containerWidth = getContainerWidth();
+      if (!containerWidth) return 0;
+      const slides = track.querySelectorAll('.category-card');
+      slides.forEach(slide => {
+        slide.style.flex = `0 0 ${containerWidth}px`;
+        slide.style.width = `${containerWidth}px`;
+        slide.style.minWidth = `${containerWidth}px`;
+        slide.style.maxWidth = `${containerWidth}px`;
+      });
+      track.style.width = `${containerWidth * slides.length}px`;
+      return containerWidth;
+    }
 
     function getItemsVisible() {
       return 1;
@@ -269,8 +290,7 @@ function initCategoryCarousel() {
         currentIndex = Math.min(currentIndex, totalSteps - 1);
         currentIndex = Math.max(currentIndex, 0);
 
-        const containerWidth = track.parentElement.offsetWidth;
-        const stepWidth = containerWidth;
+        const stepWidth = syncSlideWidths();
         track.style.transform = `translateX(-${currentIndex * stepWidth}px)`;
         
         dotsContainer.innerHTML = '';
@@ -324,6 +344,39 @@ function initCategoryCarousel() {
     if (container) {
       container.addEventListener('mouseenter', stopAutoPlay);
       container.addEventListener('mouseleave', startAutoPlay);
+
+      container.addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+        touchDeltaX = 0;
+        stopAutoPlay();
+      }, { passive: true });
+
+      container.addEventListener('touchmove', e => {
+        touchDeltaX = e.touches[0].clientX - touchStartX;
+      }, { passive: true });
+
+      container.addEventListener('touchend', () => {
+        if (Math.abs(touchDeltaX) > 50) {
+          isSwiping = true;
+          const itemsVisible = getItemsVisible();
+          const totalSteps = items.length - itemsVisible + 1;
+          if (touchDeltaX < 0) {
+            currentIndex = (currentIndex + 1) % totalSteps;
+          } else {
+            currentIndex = (currentIndex - 1 + totalSteps) % totalSteps;
+          }
+          updateCarousel();
+          setTimeout(() => { isSwiping = false; }, 350);
+        }
+        startAutoPlay();
+      }, { passive: true });
+
+      track.addEventListener('click', e => {
+        if (isSwiping) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+      }, true);
     }
 
     // Wait for images to load before initial update
@@ -369,11 +422,9 @@ function renderProductCard(product, showViewDetails, index) {
       <div class="product-info">
         <h3>${product.name}</h3>
         <p>${product.description.substring(0, 60)}...</p>
-        <div class="btn-group" style="display:flex; gap:10px; flex-direction:column;">
-          ${showViewDetails ? `<a href="${detailUrl}" class="btn btn-black btn-sm" style="padding:10px; font-size:0.8rem;">View Details</a>` : ''}
-          <a href="${orderUrl}" target="_blank" rel="noopener" class="btn btn-green btn-sm" style="padding:10px; font-size:0.8rem;">
-            Order on WhatsApp
-          </a>
+        <div class="btn-group">
+          ${showViewDetails ? `<a href="${detailUrl}" class="btn btn-black btn-sm">View Details</a>` : ''}
+          <a href="${orderUrl}" target="_blank" rel="noopener" class="btn btn-green btn-sm">Order on WhatsApp</a>
         </div>
       </div>
     </div>

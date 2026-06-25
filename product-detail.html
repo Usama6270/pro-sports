@@ -75,7 +75,7 @@
           <div class="detail-img-box" id="galleryMain">
             <!-- Populated by JS -->
           </div>
-          <div class="gallery-thumbs" id="galleryThumbs" style="display:flex; gap:10px; margin-top:20px;">
+          <div class="gallery-thumbs" id="galleryThumbs">
             <!-- Populated by JS -->
           </div>
         </div>
@@ -84,9 +84,9 @@
           <h1 id="detailName">PRODUCT NAME</h1>
           <p class="detail-desc" id="detailDesc">Premium quality sports gear designed for champions.</p>
           
-          <div style="margin-bottom:30px;">
-            <label class="blue-label" style="display:block; margin-bottom:10px;">SELECT SIZE</label>
-            <div class="size-selector" style="display:flex; gap:10px;">
+          <div class="detail-options">
+            <label class="blue-label detail-label">SELECT SIZE</label>
+            <div class="size-selector">
               <div class="f-tab active">S</div>
               <div class="f-tab">M</div>
               <div class="f-tab">L</div>
@@ -94,18 +94,18 @@
             </div>
           </div>
 
-          <div style="margin-bottom:40px;">
-            <label class="blue-label" style="display:block; margin-bottom:10px;">QUANTITY</label>
-            <div class="qty-selector" style="display:flex; align-items:center; gap:20px;">
-              <button class="c-btn" id="qtyMinus" style="width:35px; height:35px;">-</button>
-              <span id="qtyValue" style="font-weight:700; font-size:1.2rem;">1</span>
-              <button class="c-btn" id="qtyPlus" style="width:35px; height:35px;">+</button>
+          <div class="detail-options qty-block">
+            <label class="blue-label detail-label">QUANTITY</label>
+            <div class="qty-selector">
+              <button class="c-btn qty-btn" id="qtyMinus">-</button>
+              <span id="qtyValue" class="qty-value">1</span>
+              <button class="c-btn qty-btn" id="qtyPlus">+</button>
             </div>
           </div>
 
-          <div class="detail-btns" style="display:flex; flex-direction:column; gap:15px;">
-            <a href="#" id="orderBtn" target="_blank" class="btn btn-green" style="width:100%;">ORDER ON WHATSAPP →</a>
-            <a href="#" id="askBtn" target="_blank" class="btn btn-outline" style="width:100%;">ASK A QUESTION</a>
+          <div class="detail-btns">
+            <a href="#" id="orderBtn" target="_blank" class="btn btn-green">ORDER ON WHATSAPP →</a>
+            <a href="#" id="askBtn" target="_blank" class="btn btn-outline detail-ask-btn">ASK A QUESTION</a>
           </div>
         </div>
       </div>
