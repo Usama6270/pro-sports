@@ -1,222 +1,362 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="View product details and order on WhatsApp at Pro Sports. USA Professional Sports Brand.">
-  <title>Product Details | PRO SPORTS</title>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Poppins:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body data-page="product-detail">
-
-  <div class="top-bar">
-    <div class="container">
-      <span class="top-bar-desktop">DELIVERY AVAILABLE | PAKISTAN & WORLDWIDE</span>
-      <span class="top-bar-mobile">WHATSAPP: 03426915199</span>
-    </div>
-  </div>
-
-  <div class="overlay" id="overlay"></div>
-
-  <header class="header" id="header">
-    <div class="nav-wrapper container">
-      <a href="index.html" class="nav-logo">
-        <div class="logo-box">
-          <img src="images/logo.png" alt="Pro Sports" class="logo-img"
-            onerror="this.style.display='none';
-            document.querySelector('.logo-fallback').style.display='flex'">
-          <div class="logo-fallback" style="display:none">
-            <span class="logo-icon">⚽</span>
-          </div>
-        </div>
-        <div class="logo-text-wrap">
-          <span class="logo-pro">PRO</span>
-          <span class="logo-sports">SPORTS</span>
-          <span class="logo-tagline">PREMIUM GEAR</span>
-        </div>
-      </a>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="shop.html">Shop</a></li>
-        <li><a href="shop.html?category=uniform">Uniform</a></li>
-        <li><a href="shop.html?category=jacket">Jacket</a></li>
-        <li><a href="shop.html?category=sportswear">Sportswear</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-      <div class="nav-actions">
-        <a href="https://wa.me/923426915199" target="_blank" class="btn-quote">Get Quote →</a>
-        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
-      </div>
-    </div>
-  </header>
-
-  <nav class="mobile-nav" id="mobileNav">
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="shop.html?category=uniform">Uniform</a>
-    <a href="shop.html?category=jacket">Jacket</a>
-    <a href="shop.html?category=sportswear">Sportswear</a>
-    <a href="faq.html">FAQ</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-
-  <div id="productNotFound" class="container" style="display:none; text-align:center; padding: 100px 0;">
-    <h2>Product Not Found</h2>
-    <p>Sorry, we couldn't find this product.</p>
-    <a href="shop.html" class="btn btn-black" style="margin-top:20px;">Browse All Products</a>
-  </div>
-
-  <section class="section-padding" id="productDetailContent">
-    <div class="container">
-      <div class="detail-grid">
-        <div class="detail-visual">
-          <div class="detail-img-box" id="galleryMain">
-            <!-- Populated by JS -->
-          </div>
-          <div class="gallery-thumbs" id="galleryThumbs">
-            <!-- Populated by JS -->
-          </div>
-        </div>
-        <div class="detail-info">
-          <span class="red-badge" id="detailBadge">CATEGORY</span>
-          <h1 id="detailName">PRODUCT NAME</h1>
-          <p class="detail-desc" id="detailDesc">Premium quality sports gear designed for champions.</p>
-          
-          <div class="detail-options">
-            <label class="blue-label detail-label">SELECT SIZE</label>
-            <div class="size-selector">
-              <div class="f-tab active">S</div>
-              <div class="f-tab">M</div>
-              <div class="f-tab">L</div>
-              <div class="f-tab">XL</div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="View product details and order on WhatsApp at Pro Sports. USA Professional Sports Brand."
+        />
+        <title>Product Details | PRO SPORTS</title>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Poppins:wght@500&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body data-page="product-detail">
+        <div class="top-bar">
+            <div class="container">
+                <span class="top-bar-desktop"
+                    >DELIVERY AVAILABLE | PAKISTAN & WORLDWIDE</span
+                >
+                <span class="top-bar-mobile">WHATSAPP: 03426915199</span>
             </div>
-          </div>
+        </div>
 
-          <div class="detail-options qty-block">
-            <label class="blue-label detail-label">QUANTITY</label>
-            <div class="qty-selector">
-              <button class="c-btn qty-btn" id="qtyMinus">-</button>
-              <span id="qtyValue" class="qty-value">1</span>
-              <button class="c-btn qty-btn" id="qtyPlus">+</button>
+        <div class="overlay" id="overlay"></div>
+
+        <header class="header" id="header">
+            <div class="nav-wrapper container">
+                <a href="index.html" class="nav-logo">
+                    <div class="logo-box">
+                        <img
+                            src="images/logo.png"
+                            alt="Pro Sports"
+                            class="logo-img"
+                            onerror="
+                                this.style.display = 'none';
+                                document.querySelector(
+                                    '.logo-fallback',
+                                ).style.display = 'flex';
+                            "
+                        />
+                        <div class="logo-fallback" style="display: none">
+                            <span class="logo-icon">⚽</span>
+                        </div>
+                    </div>
+                    <div class="logo-text-wrap">
+                        <span class="logo-pro">PRO</span>
+                        <span class="logo-sports">SPORTS</span>
+                        <span class="logo-tagline">PREMIUM GEAR</span>
+                    </div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="shop.html?category=uniform">Uniform</a></li>
+                    <li><a href="shop.html?category=jacket">Jacket</a></li>
+                    <li>
+                        <a href="shop.html?category=sportswear">Sportswear</a>
+                    </li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a
+                        href="https://wa.me/923426915199"
+                        target="_blank"
+                        class="btn-quote"
+                        >Get Quote →</a
+                    >
+                    <button class="hamburger" id="hamburger" aria-label="Menu">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
             </div>
-          </div>
+        </header>
 
-          <div class="detail-btns">
-            <a href="#" id="orderBtn" target="_blank" class="btn btn-green">ORDER ON WHATSAPP →</a>
-            <a href="#" id="askBtn" target="_blank" class="btn btn-outline detail-ask-btn">ASK A QUESTION</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="shop.html?category=uniform">Uniform</a>
+            <a href="shop.html?category=jacket">Jacket</a>
+            <a href="shop.html?category=sportswear">Sportswear</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+        </nav>
 
-  <section class="section-padding" style="border-top: 1px solid var(--border);">
-    <div class="container">
-      <span class="blue-label">RELATED PRODUCTS</span>
-      <h2>YOU MAY ALSO LIKE</h2>
-      <div class="products-grid" id="relatedGrid" style="margin-top:40px;">
-        <!-- Populated by JS -->
-      </div>
-    </div>
-  </section>
+        <div
+            id="productNotFound"
+            class="container"
+            style="display: none; text-align: center; padding: 100px 0"
+        >
+            <h2>Product Not Found</h2>
+            <p>Sorry, we couldn't find this product.</p>
+            <a href="shop.html" class="btn btn-black" style="margin-top: 20px"
+                >Browse All Products</a
+            >
+        </div>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="index.html" class="logo">
-            <img src="images/logo.png" alt="Pro Sports" class="logo-img">
-          </a>
-          <p class="tagline">Your Game Starts Here</p>
-          <div class="social-links">
-            <a href="#">IG</a>
-            <a href="#">FB</a>
-            <a href="#">TK</a>
-            <a href="#">YT</a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>QUICK LINKS</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="shop.html">Shop</a></li>
-            <li><a href="contact.html">Contact Us</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>CATEGORIES</h4>
-          <ul>
-            <li><a href="shop.html?category=uniform">Sports Uniforms</a></li>
-            <li><a href="shop.html?category=sportswear">Sportswear</a></li>
-            <li><a href="shop.html?category=jacket">Jackets</a></li>
-            <li><a href="shop.html?category=outerwear">Hoodies & Outerwear</a></li>
-            <li><a href="shop.html?category=tracksuit">Tracksuits</a></li>
-            <li><a href="shop.html?category=accessories">Accessories</a></li>
-            <li><a href="shop.html?category=socks">Socks</a></li>
-            <li><a href="shop.html?category=footwear">Footwear</a></li>
-          </ul>
-        </div>
-        <div class="footer-contact">
-          <h4>CONTACT US</h4>
-          
-          <a href="https://wa.me/923426915199" class="footer-contact-item">
-            <span class="fc-icon">📱</span>
-            <div>
-              <span class="fc-label">WhatsApp</span>
-              <span class="fc-value">+92 342 6915199</span>
+        <section class="section-padding" id="productDetailContent">
+            <div class="container">
+                <div class="detail-grid">
+                    <div class="detail-visual">
+                        <div class="detail-img-box" id="galleryMain">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="gallery-thumbs" id="galleryThumbs">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <div class="detail-info">
+                        <span class="red-badge" id="detailBadge">CATEGORY</span>
+                        <h1 id="detailName">PRODUCT NAME</h1>
+                        <p class="detail-desc" id="detailDesc">
+                            Premium quality sports gear designed for champions.
+                        </p>
+
+                        <div class="detail-options">
+                            <label class="blue-label detail-label"
+                                >SELECT SIZE</label
+                            >
+                            <div class="size-selector">
+                                <div class="f-tab active">S</div>
+                                <div class="f-tab">M</div>
+                                <div class="f-tab">L</div>
+                                <div class="f-tab">XL</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-options qty-block">
+                            <label class="blue-label detail-label"
+                                >QUANTITY</label
+                            >
+                            <div class="qty-selector">
+                                <button class="c-btn qty-btn" id="qtyMinus">
+                                    -
+                                </button>
+                                <span id="qtyValue" class="qty-value">1</span>
+                                <button class="c-btn qty-btn" id="qtyPlus">
+                                    +
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="detail-btns">
+                            <a
+                                href="#"
+                                id="orderBtn"
+                                target="_blank"
+                                class="btn btn-green"
+                                >ORDER ON WHATSAPP →</a
+                            >
+                            <a
+                                href="#"
+                                id="askBtn"
+                                target="_blank"
+                                class="btn btn-outline detail-ask-btn"
+                                >ASK A QUESTION</a
+                            >
+                        </div>
+                    </div>
+                </div>
             </div>
-          </a>
-          
-          <a href="https://instagram.com/_prosportss" target="_blank" class="footer-contact-item">
-            <span class="fc-icon">📸</span>
-            <div>
-              <span class="fc-label">Instagram</span>
-              <span class="fc-value">@_prosportss</span>
+        </section>
+
+        <section
+            class="section-padding"
+            style="border-top: 1px solid var(--border)"
+        >
+            <div class="container">
+                <span class="blue-label">RELATED PRODUCTS</span>
+                <h2>YOU MAY ALSO LIKE</h2>
+                <div
+                    class="products-grid"
+                    id="relatedGrid"
+                    style="margin-top: 40px"
+                >
+                    <!-- Populated by JS -->
+                </div>
             </div>
-          </a>
-          
-          <div class="footer-contact-item">
-            <span class="fc-icon">📍</span>
-            <div>
-              <span class="fc-label">Location</span>
-              <span class="fc-value">Sialkot, Pakistan</span>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-brand">
+                        <a href="index.html" class="logo">
+                            <img
+                                src="images/logo.png"
+                                alt="Pro Sports"
+                                class="logo-img"
+                            />
+                        </a>
+                        <p class="tagline">Your Game Starts Here</p>
+                        <div class="social-links">
+                            <a
+                                href="https://instagram.com/_prosportss"
+                                target="_blank"
+                                aria-label="Instagram"
+                                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2m0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9M17.25 5.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6"
+                                    /></svg
+                            ></a>
+                            <a href="#" aria-label="Facebook"
+                                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.7-1.6H17V4.8c-.3 0-.9-.1-1.8-.1-3 0-4.9 1.8-4.9 5.1V11H7.5v3h2.8v8h3.2Z"
+                                    /></svg
+                            ></a>
+                            <a href="#" aria-label="TikTok"
+                                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="M14 3c.3 1.6 1.2 3 2.5 4 1 .8 2.2 1.3 3.5 1.4v3.1a8.3 8.3 0 0 1-3.9-1v5.1a6.6 6.6 0 1 1-6.6-6.6c.4 0 .8 0 1.2.1v3.2a3.7 3.7 0 1 0 2.3 3.4V3H14Z"
+                                    /></svg
+                            ></a>
+                            <a href="#" aria-label="YouTube"
+                                ><svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="M21.6 7.2a2.9 2.9 0 0 0-2-2c-1.8-.5-7.6-.5-7.6-.5s-5.8 0-7.6.5a2.9 2.9 0 0 0-2 2A30.7 30.7 0 0 0 2 12a30.7 30.7 0 0 0 .4 4.8 2.9 2.9 0 0 0 2 2c1.8.5 7.6.5 7.6.5s5.8 0 7.6-.5a2.9 2.9 0 0 0 2-2A30.7 30.7 0 0 0 22 12a30.7 30.7 0 0 0-.4-4.8M10 15.5v-7l6 3.5-6 3.5Z"
+                                    /></svg
+                            ></a>
+                        </div>
+                    </div>
+                    <div class="footer-col">
+                        <h4>QUICK LINKS</h4>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="shop.html">Shop</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>CATEGORIES</h4>
+                        <ul>
+                            <li>
+                                <a href="shop.html?category=uniform"
+                                    >Sports Uniforms</a
+                                >
+                            </li>
+                            <li>
+                                <a href="shop.html?category=sportswear"
+                                    >Sportswear</a
+                                >
+                            </li>
+                            <li>
+                                <a href="shop.html?category=jacket">Jackets</a>
+                            </li>
+                            <li>
+                                <a href="shop.html?category=outerwear"
+                                    >Hoodies & Outerwear</a
+                                >
+                            </li>
+                            <li>
+                                <a href="shop.html?category=tracksuit"
+                                    >Tracksuits</a
+                                >
+                            </li>
+                            <li>
+                                <a href="shop.html?category=accessories"
+                                    >Accessories</a
+                                >
+                            </li>
+                            <li>
+                                <a href="shop.html?category=socks">Socks</a>
+                            </li>
+                            <li>
+                                <a href="shop.html?category=footwear"
+                                    >Footwear</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="footer-contact">
+                        <h4>CONTACT US</h4>
+
+                        <a
+                            href="https://wa.me/923426915199"
+                            class="footer-contact-item"
+                        >
+                            <span class="fc-icon" aria-hidden="true"
+                                ><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.5 4.1 1.5 5.9L0 24l6.4-1.7a12 12 0 0 0 5.6 1.4h.1c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.5-8.3ZM12 21.7h-.1c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.8 1 1-3.7-.2-.3a9.8 9.8 0 0 1-1.5-5.2C2.3 6.5 6.6 2.2 12 2.2c2.6 0 5 1 6.9 2.9a9.7 9.7 0 0 1 2.9 6.9c0 5.4-4.4 9.7-9.8 9.7Zm5.3-7.3c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1l-.9 1.2c-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.5a8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.4.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1.1 2.9 1.2 3.1c.2.2 2.1 3.2 5 4.4.7.3 1.3.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.8-.7 2.1-1.4.2-.7.2-1.3.1-1.4 0-.1-.2-.2-.5-.3Z"
+                                    /></svg
+                            ></span>
+                            <div>
+                                <span class="fc-label">WhatsApp</span>
+                                <span class="fc-value">+92 342 6915199</span>
+                            </div>
+                        </a>
+
+                        <a
+                            href="https://instagram.com/_prosportss"
+                            target="_blank"
+                            class="footer-contact-item"
+                        >
+                            <span class="fc-icon" aria-hidden="true"
+                                ><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9a5.5 5.5 0 0 1-5.5 5.5h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2m0 2A3.5 3.5 0 0 0 4 7.5v9A3.5 3.5 0 0 0 7.5 20h9a3.5 3.5 0 0 0 3.5-3.5v-9A3.5 3.5 0 0 0 16.5 4h-9M17.25 5.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6"
+                                    /></svg
+                            ></span>
+                            <div>
+                                <span class="fc-label">Instagram</span>
+                                <span class="fc-value">@_prosportss</span>
+                            </div>
+                        </a>
+
+                        <div class="footer-contact-item">
+                            <span class="fc-icon" aria-hidden="true"
+                                ><svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2a7 7 0 0 1 7 7c0 5.2-7 13-7 13S5 14.2 5 9a7 7 0 0 1 7-7Zm0 9.5A2.5 2.5 0 1 0 12 6a2.5 2.5 0 0 0 0 5.5Z"
+                                    /></svg
+                            ></span>
+                            <div>
+                                <span class="fc-label">Location</span>
+                                <span class="fc-value">Sialkot, Pakistan</span>
+                            </div>
+                        </div>
+
+                        <!-- PAYMENT METHODS -->
+                        <div class="footer-section-title">PAYMENT METHODS</div>
+                        <div class="payment-badges">
+                            <span class="badge">Western Union</span>
+                            <span class="badge">MoneyGram</span>
+                            <span class="badge">Remitly</span>
+                            <span class="badge">Wise</span>
+                            <span class="badge">Zoom</span>
+                            <span class="badge">Ria</span>
+                        </div>
+
+                        <!-- DELIVERY -->
+                        <div class="footer-section-title">DELIVERY VIA</div>
+                        <div class="delivery-badges">
+                            <span class="badge delivery">✈️ DHL</span>
+                            <span class="badge delivery">📦 UPS</span>
+                            <span class="badge delivery">🚚 FedEx</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    &copy; 2025 PRO SPORTS. All Rights Reserved.
+                </div>
             </div>
-          </div>
-          
-          <!-- PAYMENT METHODS -->
-          <div class="footer-section-title">PAYMENT METHODS</div>
-          <div class="payment-badges">
-            <span class="badge">Western Union</span>
-            <span class="badge">MoneyGram</span>
-            <span class="badge">Remitly</span>
-            <span class="badge">Wise</span>
-            <span class="badge">Zoom</span>
-            <span class="badge">Ria</span>
-          </div>
-          
-          <!-- DELIVERY -->
-          <div class="footer-section-title">DELIVERY VIA</div>
-          <div class="delivery-badges">
-            <span class="badge delivery">✈️ DHL</span>
-            <span class="badge delivery">📦 UPS</span>
-            <span class="badge delivery">🚚 FedEx</span>
-          </div>
+        </footer>
+
+        <div class="whatsapp-float">
+            <a href="https://wa.me/923426915199" target="_blank" class="wa-btn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                    />
+                </svg>
+            </a>
         </div>
-      </div>
-      <div class="footer-bottom">
-        &copy; 2025 PRO SPORTS. All Rights Reserved.
-      </div>
-    </div>
-  </footer>
 
-  <div class="whatsapp-float">
-    <a href="https://wa.me/923426915199" target="_blank" class="wa-btn">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    </a>
-  </div>
-
-  <script src="script.js"></script>
-</body>
+        <script src="script.js"></script>
+    </body>
 </html>
