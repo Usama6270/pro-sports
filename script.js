@@ -629,7 +629,8 @@ function initPageTransitions() {
       href.startsWith("#") ||
       href.startsWith("http") ||
       href.startsWith("mailto") ||
-      href.includes("wa.me")
+      href.includes("wa.me") ||
+      link.closest("#mobileNav")
     )
       return;
 
@@ -645,11 +646,143 @@ function initPageTransitions() {
 
 /* ===== NAVBAR ===== */
 
+const mobileNavigation = {
+  main: [
+    { label: "HOME", href: "index.html" },
+    { label: "Shop", href: "shop.html" },
+    {
+      label: "SPORTSWEAR",
+      children: [
+        { label: "Soccer Uniform", href: "shop.html?product=22" },
+        { label: "American Football Uniform", href: "shop.html?product=14" },
+        { label: "Baseball Uniform", href: "shop.html?product=21" },
+        { label: "Basketball Uniform", href: "shop.html?product=9" },
+        { label: "T-Shirts", href: "shop.html?product=11" },
+        { label: "Tank Tops", href: "shop.html?product=18" },
+        { label: "MMA Fight Shorts", href: "shop.html?product=24" },
+        { label: "Women’s Flare Pants", href: "shop.html?product=25" },
+        { label: "Performance Swimsuit", href: "shop.html?product=26" },
+      ],
+    },
+    {
+      label: "FASHION WEAR",
+      children: [
+        { label: "Jackets", href: "shop.html?category=jacket" },
+        { label: "Hoodies & Outerwear", href: "shop.html?category=outerwear" },
+        { label: "Tracksuits", href: "shop.html?category=tracksuit" },
+        { label: "Accessories", href: "shop.html?category=accessories" },
+        { label: "Socks", href: "shop.html?category=socks" },
+        { label: "Footwear", href: "shop.html?category=footwear" },
+      ],
+    },
+    {
+      label: "STREETWEAR",
+      children: [
+        { label: "Boxy Crop Tee", href: "shop.html?product=23" },
+        { label: "Casual T-Shirts", href: "shop.html?product=11" },
+        { label: "Custom Caps", href: "shop.html?product=17" },
+        { label: "Lifestyle Apparel", href: "shop.html?category=sportswear" },
+        { label: "Custom Slides", href: "shop.html?product=27" },
+      ],
+    },
+    { label: "FAQ", href: "faq.html" },
+    { label: "CONTACT", href: "contact.html" },
+  ],
+};
+
+function renderMobileNavbar() {
+  const mobileNavBody = document.getElementById("mobileNavBody");
+  if (!mobileNavBody) return;
+
+  const menuMarkup = mobileNavigation.main
+    .map((item) => {
+      if (item.children) {
+        return `
+          <div class="mobile-nav-group">
+            <button class="mobile-nav-toggle" type="button">
+              <span class="mobile-nav-main">
+                <span class="mobile-nav-copy">
+                  <span class="mobile-nav-title">${item.label}</span>
+                </span>
+              </span>
+              <span class="mobile-nav-arrow" aria-hidden="true"></span>
+            </button>
+            <div class="mobile-nav-accordion">
+              <div class="mobile-nav-sublist">
+                ${item.children
+                  .map(
+                    (child) => `
+                      <a href="${child.href}" class="mobile-nav-sublink" data-nav-link="true">${child.label}</a>
+                    `,
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <a href="${item.href}" class="mobile-nav-link" data-nav-link="true">
+          <span class="mobile-nav-main">
+            <span class="mobile-nav-copy">
+              <span class="mobile-nav-title">${item.label}</span>
+            </span>
+          </span>
+        </a>
+      `;
+    })
+    .join("");
+
+  mobileNavBody.innerHTML = menuMarkup;
+  mobileNavBody.style.display = "flex";
+  mobileNavBody.style.visibility = "visible";
+  mobileNavBody.style.opacity = "1";
+
+  mobileNavBody
+    .querySelectorAll(".mobile-nav-group")
+    .forEach((group, index) => {
+      const toggle = group.querySelector(".mobile-nav-toggle");
+      const panel = group.querySelector(".mobile-nav-accordion");
+      if (!toggle || !panel) return;
+
+      function syncPanel(open) {
+        panel.style.maxHeight = open ? `${panel.scrollHeight}px` : "0px";
+      }
+
+      if (index === 0) {
+        group.classList.add("open");
+      }
+      syncPanel(group.classList.contains("open"));
+
+      toggle.addEventListener("click", () => {
+        const isOpen = group.classList.contains("open");
+        mobileNavBody
+          .querySelectorAll(".mobile-nav-group")
+          .forEach((otherGroup) => {
+            otherGroup.classList.remove("open");
+            const otherPanel = otherGroup.querySelector(
+              ".mobile-nav-accordion",
+            );
+            if (otherPanel) otherPanel.style.maxHeight = "0px";
+          });
+
+        if (!isOpen) {
+          group.classList.add("open");
+          syncPanel(true);
+        }
+      });
+    });
+}
+
 function initNavbar() {
   const header = document.getElementById("header");
   const hamburger = document.getElementById("hamburger");
   const mobileNav = document.getElementById("mobileNav");
+  const mobileNavClose = document.getElementById("mobileNavClose");
   const overlay = document.getElementById("overlay");
+
+  renderMobileNavbar();
 
   if (header) {
     window.addEventListener(
@@ -673,16 +806,37 @@ function initNavbar() {
   if (hamburger && mobileNav && overlay) {
     hamburger.addEventListener("click", () => toggleMenu());
     overlay.addEventListener("click", () => toggleMenu(true));
+    if (mobileNavClose) {
+      mobileNavClose.addEventListener("click", () => toggleMenu(true));
+    }
 
     mobileNav.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => toggleMenu(true));
+      link.addEventListener("click", (event) => {
+        const href = link.getAttribute("href");
+        if (!href) return;
+        event.preventDefault();
+        toggleMenu(true);
+        window.setTimeout(() => {
+          window.location.href = href;
+        }, 180);
+      });
     });
   }
 
   const page = window.location.pathname.split("/").pop() || "index.html";
+  const searchParams = new URLSearchParams(window.location.search);
+  const productId = searchParams.get("product");
+  const categoryParam = searchParams.get("category");
   document.querySelectorAll(".nav-links a, .mobile-nav a").forEach((link) => {
     const href = link.getAttribute("href");
-    if (href === page || (page === "" && href === "index.html")) {
+    if (!href) return;
+
+    if (
+      href === page ||
+      (page === "" && href === "index.html") ||
+      (productId && href.includes(`product=${productId}`)) ||
+      (categoryParam && href.includes(`category=${categoryParam}`))
+    ) {
       link.classList.add("active");
     }
   });
@@ -776,6 +930,8 @@ function initShopPage() {
   initShopPageAnimations();
   const params = new URLSearchParams(window.location.search);
   const urlCategory = params.get("category");
+  const urlProduct = params.get("product");
+  const productId = urlProduct ? parseInt(urlProduct, 10) : null;
   let activeCategory =
     urlCategory && categoryLabels[urlCategory] ? urlCategory : "all";
 
@@ -784,7 +940,12 @@ function initShopPage() {
     activeCategory !== "all" ? (p) => p.category === activeCategory : null,
   );
 
-  if (urlCategory && categoryLabels[urlCategory]) {
+  if (productId) {
+    const selectedProduct = getProductById(productId);
+    if (selectedProduct) {
+      document.title = selectedProduct.name + " | PRO SPORTS";
+    }
+  } else if (urlCategory && categoryLabels[urlCategory]) {
     document.title = categoryLabels[urlCategory] + " | PRO SPORTS";
   }
 
@@ -798,10 +959,12 @@ function initShopPage() {
     cards.forEach((card) => {
       const cat = card.getAttribute("data-category");
       const name = card.getAttribute("data-name");
+      const id = parseInt(card.getAttribute("data-id"), 10);
       const matchCat = activeCategory === "all" || cat === activeCategory;
+      const matchProduct = !productId || id === productId;
       const matchSearch = !query || name.includes(query);
 
-      const shouldShow = matchCat && matchSearch;
+      const shouldShow = matchCat && matchProduct && matchSearch;
       if (shouldShow) {
         if (card.classList.contains("hidden")) {
           card.classList.remove("hidden");
