@@ -406,103 +406,220 @@ img {
 .nav-logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
+    gap: 0;
     text-decoration: none;
-    transition:
-        opacity 0.3s ease,
-        transform 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 .nav-logo:hover {
-    opacity: 0.9;
+    opacity: 0.92;
 }
 
-/* Logo image box */
-.logo-box {
-    width: 52px;
-    height: 52px;
+@keyframes logoFloat {
+    0%,
+    100% {
+        transform: translateY(0) scale(1);
+        filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.08));
+    }
+    50% {
+        transform: translateY(-1px) scale(1.008);
+        filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.12));
+    }
+}
+
+@keyframes logoGlow {
+    0%,
+    100% {
+        box-shadow:
+            0 0 0 1px rgba(204, 0, 0, 0.16),
+            0 8px 18px rgba(204, 0, 0, 0.14),
+            inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+    50% {
+        box-shadow:
+            0 0 0 1px rgba(204, 0, 0, 0.22),
+            0 12px 24px rgba(204, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+}
+
+@keyframes logoShine {
+    0% {
+        transform: translateX(-130%);
+        opacity: 0;
+    }
+    18% {
+        opacity: 0.18;
+    }
+    40% {
+        transform: translateX(130%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(130%);
+        opacity: 0;
+    }
+}
+
+.logo-img-box {
+    width: 54px;
+    height: 54px;
     border-radius: 12px;
-    overflow: hidden;
-    border: 1.5px solid #cc0000;
-    background: linear-gradient(180deg, #0a0a0a 0%, #161616 100%);
+    background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+    border: 2px solid #cc0000;
+    box-shadow:
+        0 0 0 1px rgba(204, 0, 0, 0.2),
+        0 6px 20px rgba(204, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     flex-shrink: 0;
-    box-shadow:
-        0 8px 20px rgba(204, 0, 0, 0.16),
-        0 4px 14px rgba(0, 0, 0, 0.14);
+    position: relative;
+    transition:
+        transform 0.32s ease,
+        box-shadow 0.32s ease,
+        border-color 0.32s ease;
+    animation: logoGlow 9.5s ease-in-out infinite;
+}
+
+.logo-img-box::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        105deg,
+        transparent 18%,
+        rgba(255, 255, 255, 0.06) 34%,
+        rgba(255, 255, 255, 0.14) 50%,
+        rgba(255, 255, 255, 0.06) 66%,
+        transparent 82%
+    );
+    pointer-events: none;
+    mix-blend-mode: screen;
+    animation: logoShine 10.5s ease-in-out infinite;
 }
 .logo-img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: 4px;
+    padding: 6px;
+    display: block;
+    transform-origin: center;
+    animation: logoFloat 9.5s ease-in-out infinite;
+    transition:
+        transform 0.32s ease,
+        filter 0.32s ease;
 }
-.logo-fallback {
-    width: 100%;
-    height: 100%;
+
+.nav-logo:hover .logo-img-box,
+.nav-logo:focus-visible .logo-img-box {
+    transform: translateY(-1px);
+    border-color: #e00000;
+}
+
+.nav-logo:hover .logo-img,
+.nav-logo:focus-visible .logo-img {
+    transform: scale(1.025);
+    filter: drop-shadow(0 4px 10px rgba(255, 255, 255, 0.12));
+}
+.logo-img-fallback {
+    display: none;
     align-items: center;
     justify-content: center;
     font-size: 28px;
+    width: 100%;
+    height: 100%;
 }
 
-/* Logo text */
-.logo-text-wrap {
+.logo-text-group {
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
     line-height: 1;
-    gap: 1px;
+    text-align: right;
 }
 .logo-pro {
     font-family: "Barlow Condensed", sans-serif;
-    font-size: 30px;
+    font-size: 32px;
     font-weight: 900;
     color: #0a0a0a;
-    letter-spacing: 3px;
+    letter-spacing: 5px;
     line-height: 1;
     text-transform: uppercase;
+}
+.logo-divider {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to left, #cc0000, transparent);
+    margin: 2px 0;
 }
 .logo-sports {
     font-family: "Barlow Condensed", sans-serif;
     font-size: 13px;
     font-weight: 700;
     color: #cc0000;
-    letter-spacing: 6px;
+    letter-spacing: 8px;
     text-transform: uppercase;
-    border-top: 2px solid #cc0000;
-    padding-top: 3px;
-    margin-top: 2px;
+    line-height: 1;
 }
 .logo-tagline {
     font-family: "Poppins", sans-serif;
     font-size: 8px;
     font-weight: 500;
-    color: #999;
-    letter-spacing: 2px;
+    color: #aaa;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    margin-top: 3px;
+    margin-top: 4px;
 }
 
-/* MOBILE */
 @media (max-width: 768px) {
-    .logo-box {
-        width: 42px;
-        height: 42px;
-        border-radius: 8px;
+    .logo-img-box {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        animation-duration: 10.5s;
     }
+
+    .logo-img-box::after {
+        animation-duration: 11.5s;
+    }
+
+    .logo-text-group {
+        align-items: flex-end;
+        text-align: right;
+    }
+
     .logo-pro {
-        font-size: 24px;
-        letter-spacing: 2px;
-    }
-    .logo-sports {
-        font-size: 11px;
+        font-size: 26px;
         letter-spacing: 4px;
     }
+
+    .logo-sports {
+        font-size: 11px;
+        letter-spacing: 6px;
+    }
+
     .logo-tagline {
         display: none;
     }
+
     .nav-logo {
-        gap: 8px;
+        gap: 10px;
+    }
+
+    .logo-img {
+        animation-duration: 10.8s;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .logo-img-box,
+    .logo-img {
+        animation: none;
+        transition: none;
     }
 }
 
@@ -2186,7 +2303,7 @@ img {
         justify-content: flex-end;
         max-width: calc(100% - 54px);
     }
-    .logo-box {
+    .logo-img-box {
         width: 44px;
         height: 44px;
         border-radius: 10px;
@@ -2272,7 +2389,7 @@ img {
         gap: 9px;
         max-width: calc(100% - 52px);
     }
-    .logo-box {
+    .logo-img-box {
         width: 42px;
         height: 42px;
     }
@@ -3754,7 +3871,7 @@ p {
     .nav-logo {
         max-width: calc(100% - 50px);
     }
-    .logo-box {
+    .logo-img-box {
         width: 40px;
         height: 40px;
     }
@@ -4000,7 +4117,7 @@ p {
     .nav-logo {
         max-width: calc(100% - 46px);
     }
-    .logo-box {
+    .logo-img-box {
         width: 38px;
         height: 38px;
     }
@@ -4139,7 +4256,7 @@ p {
         max-width: calc(100% - 42px);
         gap: 7px;
     }
-    .logo-box {
+    .logo-img-box {
         width: 36px;
         height: 36px;
     }
@@ -4479,98 +4596,120 @@ p {
 /* ===== MOBILE HEADER LOGO POSITION OVERRIDES ===== */
 @media (max-width: 768px) {
     .nav-wrapper {
+        position: relative;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
+        min-height: 72px;
     }
 
     .nav-actions {
+        position: relative;
+        z-index: 3;
         order: 1;
         flex: 0 0 42px;
         min-width: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
     }
 
     .nav-logo {
-        order: 2;
-        flex: 1 1 auto;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
-        max-width: none;
+        width: calc(100% - 132px);
+        max-width: 240px;
         margin: 0;
-        padding-left: 42px;
-        gap: 10px;
+        padding: 0;
     }
 
-    .logo-box {
-        width: 68px;
-        height: 56px;
-        margin: 0 auto;
+    .logo-img-box {
+        width: 100%;
+        height: 52px;
+        margin: 0;
+        border-radius: 14px;
+        padding: 4px 10px;
+        background: linear-gradient(145deg, #121212, #050505);
+        box-shadow:
+            0 0 0 1px rgba(204, 0, 0, 0.22),
+            0 8px 22px rgba(204, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
     }
 
     .logo-img {
-        width: auto;
+        width: 100%;
         height: 100%;
-        max-width: 132%;
-        padding: 2px 0;
-    }
-
-    .logo-text-wrap {
-        margin-left: 0;
-        text-align: left;
-        align-items: flex-start;
+        max-width: 100%;
+        object-fit: contain;
+        object-position: center;
+        padding: 0;
+        margin: 0 auto;
+        filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.08));
     }
 }
 
 @media (max-width: 414px) {
+    .nav-wrapper {
+        min-height: 68px;
+    }
+
     .nav-actions {
         flex: 0 0 38px;
         min-width: 38px;
     }
 
     .nav-logo {
-        padding-left: 38px;
-        gap: 9px;
+        width: calc(100% - 112px);
+        max-width: 220px;
     }
 
-    .logo-box {
-        width: 62px;
-        height: 52px;
-    }
-
-    .logo-img {
-        max-width: 128%;
+    .logo-img-box {
+        height: 48px;
+        padding: 4px 9px;
     }
 }
 
 @media (max-width: 375px) {
+    .nav-wrapper {
+        min-height: 64px;
+    }
+
     .nav-logo {
-        padding-left: 36px;
-        gap: 8px;
+        width: calc(100% - 102px);
+        max-width: 200px;
     }
 
-    .logo-box {
-        width: 58px;
-        height: 50px;
-    }
-
-    .logo-img {
-        max-width: 124%;
+    .logo-img-box {
+        height: 44px;
+        padding: 4px 8px;
+        border-radius: 12px;
     }
 }
 
 @media (max-width: 320px) {
+    .nav-wrapper {
+        min-height: 60px;
+    }
+
+    .nav-actions {
+        flex: 0 0 34px;
+        min-width: 34px;
+    }
+
     .nav-logo {
-        padding-left: 34px;
-        gap: 7px;
+        width: calc(100% - 70px);
+        max-width: 200px;
     }
 
-    .logo-box {
-        width: 54px;
-        height: 48px;
-    }
-
-    .logo-img {
-        max-width: 120%;
+    .logo-img-box {
+        height: 40px;
+        padding: 4px 7px;
+        border-radius: 11px;
     }
 }

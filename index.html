@@ -54,26 +54,17 @@
         <header class="header" id="header">
             <div class="nav-wrapper container">
                 <a href="index.html" class="nav-logo">
-                    <div class="logo-box">
+                    <div class="logo-img-box">
                         <img
                             src="images/logo.png"
                             alt="Pro Sports"
                             class="logo-img"
                             onerror="
                                 this.style.display = 'none';
-                                document.querySelector(
-                                    '.logo-fallback',
-                                ).style.display = 'flex';
+                                this.nextElementSibling.style.display = 'flex';
                             "
                         />
-                        <div class="logo-fallback" style="display: none">
-                            <span class="logo-icon">⚽</span>
-                        </div>
-                    </div>
-                    <div class="logo-text-wrap">
-                        <span class="logo-pro">PRO</span>
-                        <span class="logo-sports">SPORTS</span>
-                        <span class="logo-tagline">PREMIUM GEAR</span>
+                        <div class="logo-img-fallback">⚽</div>
                     </div>
                 </a>
                 <ul class="nav-links">
