@@ -1,6 +1,6 @@
 /* ===== PRO SPORTS — Shared JavaScript ===== */
 
-const WA_BASE = "https://wa.me/923041632932";
+const WA_BASE = "https://wa.me/923426915199";
 
 const products = [
   {
