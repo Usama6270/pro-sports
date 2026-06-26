@@ -655,8 +655,7 @@ img {
 .nav-dropdown {
     position: relative;
 }
-.nav-dropdown > a::after {
-    content: " ▾";
+.nav-dropdown > a span {
     font-size: 0.75em;
 }
 .dropdown-menu {
@@ -681,7 +680,7 @@ img {
     visibility: visible;
     transform: translateX(-50%) translateY(0);
 }
-.dropdown-menu li a {
+.dropdown-menu a {
     display: block;
     padding: 10px 20px;
     font-weight: 600;
@@ -690,7 +689,7 @@ img {
     white-space: nowrap;
     border-bottom: none;
 }
-.dropdown-menu li a:hover {
+.dropdown-menu a:hover {
     background: var(--bg-secondary);
     color: var(--red);
 }
@@ -717,6 +716,17 @@ img {
 }
 .btn-quote:hover {
     background: var(--red);
+}
+
+/* ===== MOBILE NAV ===== */
+@media (max-width: 992px) {
+    .nav-links, .btn-quote {
+        display: none;
+    }
+    
+    .hamburger {
+        display: flex;
+    }
 }
 
 .hamburger {
@@ -1148,7 +1158,7 @@ img {
 .hero-media {
     position: relative;
     width: 100%;
-    height: 90vh;
+    height: 75vh;
     overflow: hidden;
     animation: heroFadeZoom 1.55s cubic-bezier(0.19, 1, 0.22, 1) both;
 }
@@ -1176,17 +1186,15 @@ img {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0.8) 30%,
-        transparent 80%
-    );
+    background: rgba(0, 0, 0, 0.75);
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 .hero-text {
-    max-width: 700px;
-    padding: 0 6%;
+    max-width: 800px;
+    padding: 0 30px;
+    text-align: center;
 }
 .hero-animate {
     opacity: 0;
@@ -1232,12 +1240,13 @@ img {
     color: #ccc;
     margin-bottom: 35px;
     font-size: 1.1rem;
-    max-width: 500px;
+    max-width: 100%;
 }
 .hero-buttons {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
+    justify-content: center;
     margin-bottom: 35px;
 }
 .hero-rating {
@@ -1264,6 +1273,45 @@ img {
     color: white;
     font-size: 0.85rem;
     font-weight: 500;
+}
+
+/* ===== RESPONSIVE HERO ===== */
+@media (max-width: 1024px) {
+    .hero-media {
+        height: 70vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-media {
+        height: 70vh;
+    }
+    
+    .hero-text {
+        padding: 0 25px;
+    }
+    
+    .hero-text h1 {
+        font-size: clamp(1.8rem, 8vw, 3.5rem);
+    }
+    
+    .hero-text p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-media {
+        height: 75vh;
+    }
+    
+    .hero-text h1 {
+        font-size: clamp(1.5rem, 7vw, 3rem);
+    }
+    
+    .hero-text {
+        padding: 0 20px;
+    }
 }
 
 .btn-black {
