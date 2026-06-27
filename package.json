@@ -1,0 +1,29 @@
+{
+  "name": "pro-sports",
+  "version": "1.0.0",
+  "description": "Pro Sports - Premium custom sports uniforms, sportswear, jackets, and accessories",
+  "main": "script.js",
+  "scripts": {
+    "dev": "python3 -m http.server 8000",
+    "test": "echo \"No tests specified\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Usama6270/pro-sports.git"
+  },
+  "keywords": [
+    "sports",
+    "uniforms",
+    "sportswear",
+    "custom-apparel"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Usama6270/pro-sports/issues"
+  },
+  "homepage": "https://github.com/Usama6270/pro-sports#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
